@@ -1,0 +1,152 @@
+{
+  "version": "1",
+  "updated_at": "2026-05-10",
+  "modules": [
+    {
+      "id": "inventory",
+      "version": "1.0.0",
+      "title": "Inventory System",
+      "description": "Item carrying, weight limits, and slot constraints. Works out of the box with sensible defaults — override per-player or per-item by asserting attribute facts.",
+      "tags": ["items", "rpg", "core"],
+      "predicates": [
+        "can_carry/2",
+        "inventory_full/1",
+        "carrying_weight/2",
+        "item_count/2",
+        "has_item/2",
+        "item_in_slot/3",
+        "slot_available/2"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/inventory",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/inventory",
+      "installs": 0
+    },
+    {
+      "id": "loot-tables",
+      "version": "1.0.0",
+      "title": "Loot Tables",
+      "description": "Rarity tiers, condition-gated drops, and drop chance calculation. Supports time-of-day, weather, moon phase, player level, and item prerequisites as conditions.",
+      "tags": ["items", "drops", "rpg", "roguelike"],
+      "predicates": [
+        "drops/2",
+        "drops_at/3",
+        "eligible_loot/2",
+        "rarity_tier/2",
+        "condition_met/2",
+        "loot_chance/3"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/loot-tables",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/loot-tables",
+      "installs": 0
+    },
+    {
+      "id": "quests",
+      "version": "1.0.0",
+      "title": "Quest System",
+      "description": "Quest availability, prerequisite chains, ordered objective tracking, and turn-in detection. Supports level requirements, item requirements, and quest dependencies.",
+      "tags": ["quests", "rpg", "progression", "narrative"],
+      "predicates": [
+        "quest_available/2",
+        "quest_in_progress/2",
+        "quest_complete/2",
+        "next_objective/3",
+        "quest_blocked_by/3",
+        "can_turn_in/2"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/quests",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/quests",
+      "installs": 0
+    },
+    {
+      "id": "combat",
+      "version": "0.9.0",
+      "title": "Combat System",
+      "description": "Damage calculation, resistances, weaknesses, status effects, and turn order. Supports elemental types, armor classes, and buff/debuff stacking.",
+      "tags": ["combat", "rpg", "action"],
+      "predicates": [
+        "effective_damage/4",
+        "can_attack/2",
+        "status_effect_active/2",
+        "turn_order/2",
+        "is_defeated/1",
+        "resistance/3"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/combat",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/combat",
+      "installs": 0,
+      "status": "coming_soon"
+    },
+    {
+      "id": "progression",
+      "version": "0.9.0",
+      "title": "Progression & Leveling",
+      "description": "XP thresholds, level-up triggers, stat unlocks, and prestige conditions. Configurable XP curve — linear, exponential, or custom breakpoints.",
+      "tags": ["progression", "rpg", "xp", "levels"],
+      "predicates": [
+        "level_for_xp/2",
+        "xp_to_next_level/2",
+        "stat_at_level/3",
+        "unlock_available/2",
+        "can_prestige/1"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/progression",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/progression",
+      "installs": 0,
+      "status": "coming_soon"
+    },
+    {
+      "id": "economy",
+      "version": "0.9.0",
+      "title": "Economy & Crafting",
+      "description": "Crafting recipes, buy/sell pricing, supply-demand adjustments, and trade validation. Supports material substitutions and quality tiers.",
+      "tags": ["economy", "crafting", "trading", "simulation"],
+      "predicates": [
+        "can_craft/2",
+        "craft_cost/2",
+        "buy_price/2",
+        "sell_price/2",
+        "missing_materials/3"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/economy",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/economy",
+      "installs": 0,
+      "status": "coming_soon"
+    },
+    {
+      "id": "npc-state",
+      "version": "0.9.0",
+      "title": "NPC State & Dialogue",
+      "description": "Relationship tracking, faction membership, dialogue prerequisites, and NPC disposition. Integrates naturally with orchestrate — the dungeon master agent uses these predicates automatically.",
+      "tags": ["npc", "dialogue", "narrative", "rpg"],
+      "predicates": [
+        "npc_friendly/2",
+        "npc_hostile/2",
+        "dialogue_available/3",
+        "faction_member/2",
+        "relationship_level/3"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/npc-state",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/npc-state",
+      "installs": 0,
+      "status": "coming_soon"
+    },
+    {
+      "id": "puzzle-fsm",
+      "version": "0.9.0",
+      "title": "Puzzle & FSM",
+      "description": "Finite state machine transitions, win/loss condition detection, hint generation, and sequence validation. Works for puzzles, locked doors, combination locks, and multi-step interactions.",
+      "tags": ["puzzle", "fsm", "logic"],
+      "predicates": [
+        "can_transition/3",
+        "puzzle_solved/1",
+        "valid_sequence/2",
+        "hint_for/2",
+        "blocked_by/2"
+      ],
+      "rules_url": "https://app.datagrout.ai/batteries/puzzle-fsm",
+      "readme_url": "https://github.com/DataGrout/cookbook/tree/main/games/rulesets/puzzle-fsm",
+      "installs": 0,
+      "status": "coming_soon"
+    }
+  ]
+}
