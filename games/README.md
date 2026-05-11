@@ -62,15 +62,17 @@ end)
 
 Variables are uppercase. The LC fills them in.
 
+**Queries cost zero tokens.** Answers are computed by the Prolog engine — not an LLM. This means query results are deterministic, instant, and free regardless of how complex the rules are. The LLM (or you) writes the rules once; the engine evaluates them for free on every call. This is sometimes called symbolic AI or neuro-symbolic AI.
+
 ## The Game Loop Pattern
 
 ```
 Game event happens
-       ↓
+       |
   assert facts        -- update what's true
-       ↓
+       |
   query rules         -- ask what's possible / what should happen
-       ↓
+       |
   game reacts         -- render the answer
 ```
 
@@ -90,42 +92,64 @@ DataStore stores values you look up by key. Logic Cells store relationships you 
 | "What quests are available given current state?" | write code | write one rule |
 | Rule changes apply immediately | ✗ | ✓ |
 | LLM can write the rules for you | ✗ | ✓ |
+| Token cost per query | — | zero |
 
 For simple key/value storage use DataStore. For anything involving conditions, prerequisites, relationships, or derived state, Logic Cells are less code and more flexible.
 
-## Module System
+## Batteries — Pre-built Rule Modules
 
-Instead of writing rules from scratch, install pre-built rule modules:
+Instead of writing rules from scratch, install pre-built rule modules from the [logic-batteries](https://github.com/datagrout/logic-batteries) library. Each battery is a tested set of Prolog predicates you can install into any namespace in one call.
 
 ```lua
--- Browse available modules
-dg:batteries().list(function(catalog) ... end)
-
 -- Install the inventory system
 dg:batteries().install("inventory", "my-game", function(result)
-  print("Inventory rules installed: " .. result.predicate_count .. " predicates")
+  print("Installed: " .. result.predicate_count .. " predicates")
 end)
 
--- Query immediately
+-- Query immediately — no setup, no schema
 dg:query("my-game", "can_carry(alice, Item)", function(results) ... end)
 ```
 
-See [rulesets/](./rulesets/) for all available modules.
+### Game batteries
 
-## Rulesets
+| Battery | What it does |
+|---------|-------------|
+| `inventory` | Item carrying, weight limits, slot constraints |
+| `loot-tables` | Rarity tiers, condition-gated drops |
+| `quests` | Prerequisites, progress tracking, branching objectives |
+| `combat` | Damage, resistances, status effects, turn order |
+| `progression` | XP, level thresholds, stat unlocks |
+| `economy` | Crafting, pricing, supply/demand |
+| `npc-state` | Relationships, dialogue conditions, factions |
+| `faction` | Reputation, allegiances, conflict rules |
+| `dialogue` | Dialogue availability, conditions, branching |
+| `crafting` | Recipe resolution, material substitution |
+| `world` | World state, region access, environmental conditions |
+| `puzzle-fsm` | State machines, win conditions, hint generation |
+| `dungeon` | Navigation, room connectivity, path finding |
+| `ai-director` | Pacing, difficulty scaling, encounter selection |
+| `permissions` | Access control, role-based gates |
 
-The pages below are usage guides, they show what facts to assert and what queries to run. The actual Prolog source for each module lives in the [DG batteries catalog](https://app.datagrout.ai/batteries) and is loaded into your namespace on install. You never need to manage the source yourself.
+Usage guides for the core modules: [inventory](./rulesets/inventory/) — [loot-tables](./rulesets/loot-tables/) — [quests](./rulesets/quests/)
 
-| Module | Usage guide | What it does |
-|--------|-------------|--------------|
-| `inventory` | [usage ->](./rulesets/inventory/) | Item carrying, weight limits, slot constraints |
-| `loot-tables` | [usage ->](./rulesets/loot-tables/) | Rarity tiers, condition-gated drops |
-| `quests` | [usage ->](./rulesets/quests/) | Prerequisites, progress tracking, branching |
-| `combat` | catalog | Damage, resistances, status effects, turn order |
-| `progression` | catalog | XP, level thresholds, stat unlocks |
-| `economy` | catalog | Crafting, pricing, supply/demand |
-| `npc-state` | catalog | Relationships, dialogue conditions, factions |
-| `puzzle-fsm` | catalog | State machines, win conditions, hints |
+### Business batteries for simulation games
+
+The full catalog also includes a business rules suite — useful if you're building economic or simulation games:
+
+| Battery | What it does |
+|---------|-------------|
+| `pricing-rules` | Dynamic pricing, discounts, margin floors |
+| `inventory-mgmt` | Stock levels, reorder triggers, allocation |
+| `approval-chains` | Multi-step approval workflows with conditions |
+| `scheduling` | Resource booking, conflict detection |
+| `loyalty` | Points, tiers, reward eligibility |
+| `lead-scoring` | Funnel scoring, qualification rules |
+| `invoice-rules` | Billing logic, payment terms, overdue detection |
+| `compliance` | Policy enforcement, audit trail rules |
+
+A business simulator — trading company, logistics game, tycoon — can install `pricing-rules`, `inventory-mgmt`, and `scheduling` and get a working economic engine backed by symbolic reasoning, zero tokens per tick.
+
+Browse the full catalog: [github.com/datagrout/logic-batteries](https://github.com/datagrout/logic-batteries)
 
 ## Making Rules Visible to AI
 
