@@ -159,14 +159,14 @@ The full catalog also includes a business rules suite — useful if you're build
 
 | Battery | What it does |
 |---------|-------------|
-| `pricing-rules` | Dynamic pricing, discounts, margin floors |
-| `inventory-mgmt` | Stock levels, reorder triggers, allocation |
-| `approval-chains` | Multi-step approval workflows with conditions |
-| `scheduling` | Resource booking, conflict detection |
-| `loyalty` | Points, tiers, reward eligibility |
-| `lead-scoring` | Funnel scoring, qualification rules |
-| `invoice-rules` | Billing logic, payment terms, overdue detection |
-| `compliance` | Policy enforcement, audit trail rules |
+| [`pricing-rules`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/pricing_rules) | Dynamic pricing, discounts, margin floors |
+| [`inventory-mgmt`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/inventory_mgmt) | Stock levels, reorder triggers, allocation |
+| [`approval-chains`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/approval_chains) | Multi-step approval workflows with conditions |
+| [`scheduling`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/scheduling) | Resource booking, conflict detection |
+| [`loyalty`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/loyalty) | Points, tiers, reward eligibility |
+| [`lead-scoring`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/lead_scoring) | Funnel scoring, qualification rules |
+| [`invoice-rules`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/invoice_rules) | Billing logic, payment terms, overdue detection |
+| [`compliance`](https://github.com/datagrout/logic-batteries/tree/main/modules/business/compliance) | Policy enforcement, audit trail rules |
 
 A business simulator — trading company, logistics game, tycoon — can install `pricing-rules`, `inventory-mgmt`, and `scheduling` and get a working economic engine backed by symbolic reasoning, zero tokens per tick.
 
