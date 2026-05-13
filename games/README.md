@@ -114,23 +114,44 @@ dg:query("my-game", "can_carry(alice, Item)", function(results) ... end)
 
 | Battery | What it does |
 |---------|-------------|
-| `inventory` | Item carrying, weight limits, slot constraints |
-| `loot-tables` | Rarity tiers, condition-gated drops |
-| `quests` | Prerequisites, progress tracking, branching objectives |
-| `combat` | Damage, resistances, status effects, turn order |
-| `progression` | XP, level thresholds, stat unlocks |
-| `economy` | Crafting, pricing, supply/demand |
-| `npc-state` | Relationships, dialogue conditions, factions |
-| `faction` | Reputation, allegiances, conflict rules |
-| `dialogue` | Dialogue availability, conditions, branching |
-| `crafting` | Recipe resolution, material substitution |
-| `world` | World state, region access, environmental conditions |
-| `puzzle-fsm` | State machines, win conditions, hint generation |
-| `dungeon` | Navigation, room connectivity, path finding |
-| `ai-director` | Pacing, difficulty scaling, encounter selection |
-| `permissions` | Access control, role-based gates |
+| [`inventory`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/inventory) | Item carrying, weight limits, slot constraints |
+| [`loot-tables`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/loot-tables) | Rarity tiers, condition-gated drops |
+| [`quests`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/quests) | Prerequisites, progress tracking, branching objectives |
+| [`combat`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/combat) | Damage, resistances, status effects, turn order |
+| [`progression`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/progression) | XP, level thresholds, stat unlocks |
+| [`economy`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/economy) | Crafting, pricing, supply/demand |
+| [`npc-state`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/npc-state) | Relationships, dialogue conditions, factions |
+| [`faction`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/faction) | Reputation, allegiances, conflict rules |
+| [`dialogue`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/dialogue) | Dialogue availability, conditions, branching |
+| [`crafting`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/crafting) | Recipe resolution, material substitution |
+| [`world`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/world) | World state, region access, environmental conditions |
+| [`puzzle-fsm`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/puzzle-fsm) | State machines, win conditions, hint generation |
+| [`dungeon`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/dungeon) | Navigation, room connectivity, path finding |
+| [`ai-director`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/ai_director) | Pacing, difficulty scaling, encounter selection |
+| [`permissions`](https://github.com/datagrout/logic-batteries/tree/main/modules/games/permissions) | Access control, role-based gates |
 
 Usage guides for the core modules: [inventory](./rulesets/inventory/) — [loot-tables](./rulesets/loot-tables/) — [quests](./rulesets/quests/)
+
+### Probabilistic batteries
+
+Query exact probabilities instead of hand-tuned thresholds. Requires ProbLog (included in the DG runtime).
+
+| Battery | What it does |
+|---------|-------------|
+| [`prob-loot`](https://github.com/datagrout/logic-batteries/tree/main/modules/probabilistic/prob-loot) | Exact drop probability and expected yield — layers on `loot-tables` |
+| [`prob-detection`](https://github.com/datagrout/logic-batteries/tree/main/modules/probabilistic/prob-detection) | Guard perception probability from alert state and environment — requires `combat` |
+| [`prob-economy`](https://github.com/datagrout/logic-batteries/tree/main/modules/probabilistic/prob-economy) | Market uncertainty: supply and demand probability from world state — requires `economy` |
+| [`prob-npc`](https://github.com/datagrout/logic-batteries/tree/main/modules/probabilistic/prob-npc) | NPC trust and cooperation probability from faction standing — requires `npc-state` + `faction` |
+
+### Reasoning batteries
+
+Domain-agnostic batteries that layer on top of any game battery combination.
+
+| Battery | What it does |
+|---------|-------------|
+| [`fsm`](https://github.com/datagrout/logic-batteries/tree/main/modules/reasoning/fsm) | General-purpose state machine — reachability, cycle detection, shortest path. Use for anything more complex than `puzzle-fsm` |
+| [`temporal`](https://github.com/datagrout/logic-batteries/tree/main/modules/reasoning/temporal) | Event ordering, overlap, and deadline reasoning over timestamps — useful for timed quests, buffs, world event schedules |
+| [`taxonomy`](https://github.com/datagrout/logic-batteries/tree/main/modules/reasoning/taxonomy) | Hierarchical classification with property inheritance — model monster type trees, item categories, or skill trees |
 
 ### Business batteries for simulation games
 
